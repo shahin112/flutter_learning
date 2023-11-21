@@ -25,7 +25,7 @@ class MainActivity extends StatefulWidget {
 
 class _Homeactivitys extends State<MainActivity> {
   ButtonStyle buttonStyle =
-      ElevatedButton.styleFrom(minimumSize: Size(double.infinity, 50.0));
+      ElevatedButton.styleFrom(minimumSize: Size(150, 40.0));
 
   @override
   Widget build(BuildContext context) {
