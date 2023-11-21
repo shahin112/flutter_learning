@@ -27,6 +27,9 @@ class _Homeactivitys extends State<MainActivity> {
   ButtonStyle buttonStyle =
       ElevatedButton.styleFrom(minimumSize: Size(150, 40.0));
 
+  String names = "";
+  bool changeButton = false;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -47,7 +50,7 @@ class _Homeactivitys extends State<MainActivity> {
               height: 2,
             ),
             Text(
-              "Welcome",
+              "Welcome $names",
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -64,6 +67,11 @@ class _Homeactivitys extends State<MainActivity> {
                         border: OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10)))),
+                    onChanged: (value) {
+                      setState(() {
+                        names = value;
+                      });
+                    },
                   ),
                   SizedBox(
                     height: 10,
@@ -80,12 +88,30 @@ class _Homeactivitys extends State<MainActivity> {
                   SizedBox(
                     height: 10,
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      print("it is  working fine ");
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        changeButton = true;
+                      });
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //     builder: (context) => Login_activity()));
                     },
-                    child: Text("submit"),
-                    style: buttonStyle,
+                    child: AnimatedContainer(
+                      duration: Duration(seconds: 1),
+                      height: 50,
+                      width: changeButton ? 50 : 150,
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(changeButton ? 50 : 8),
+                          color: Colors.green),
+                      alignment: Alignment.center,
+                      child: changeButton
+                          ? Icon(Icons.done,color:Colors.white,)
+                          : Text(
+                              "Login",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                    ),
                   )
                 ],
               ),
