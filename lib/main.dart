@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'activity/Login_activity.dart';
 
 main() {
   runApp(const MyApp());
@@ -89,12 +90,14 @@ class _Homeactivitys extends State<MainActivity> {
                     height: 10,
                   ),
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
                       setState(() {
                         changeButton = true;
                       });
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) => Login_activity()));
+
+                      await Future.delayed(Duration(seconds: 1));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => Login_activity()));
                     },
                     child: AnimatedContainer(
                       duration: Duration(seconds: 1),
@@ -106,7 +109,10 @@ class _Homeactivitys extends State<MainActivity> {
                           color: Colors.green),
                       alignment: Alignment.center,
                       child: changeButton
-                          ? Icon(Icons.done,color:Colors.white,)
+                          ? Icon(
+                              Icons.done,
+                              color: Colors.white,
+                            )
                           : Text(
                               "Login",
                               style: TextStyle(color: Colors.black),
