@@ -1,8 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/drawer.dart';
+
+
 class Login_activity extends StatefulWidget {
-  const Login_activity({Key? key}) : super(key: key);
+  final String username;
+  final String password;
+
+  const Login_activity(
+      {Key? key, required this.username, required this.password})
+      : super(key: key);
 
   @override
   State<Login_activity> createState() => _Login_activityState();
@@ -14,12 +22,21 @@ class _Login_activityState extends State<Login_activity> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        title: Text("login"),
-        centerTitle: true,
+        title: const Text("Login"),
       ),
-      body: const Center(
-        child: Text("login activitys"),
+      body: Container(
+        color: Colors.white,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Username: ${widget.username}'),
+              Text('Password: ${widget.password}'),
+            ],
+          ),
+        ),
       ),
+      drawer: Mydrawer(),
     ));
   }
 }
