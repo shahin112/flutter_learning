@@ -24,18 +24,17 @@ class _Login_activityState extends State<Login_activity> {
 
   @override
   Widget build(BuildContext context) {
-    final Dummy_list = List.generate(50, (index) => CatalogModel.items[2]);
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
               title: const Text("Catalog"),
             ),
             body: ListView.builder(
-              itemCount: Dummy_list.length,
-              itemBuilder: (BuildContext context, int index) {
+              itemCount: CatalogModel.items.length,
+              itemBuilder: (context, index) {
                 return ItemWidget(
-                  item: Dummy_list[index],
-                );
+                  item: CatalogModel.items[index],
+                ); 
               },
             ),
             drawer: Mydrawer()));
@@ -46,6 +45,9 @@ class _Login_activityState extends State<Login_activity> {
         await rootBundle.loadString('assets/files/catalog.json');
     final decodedData = jsonDecode(catalogJson);
     var productdata = decodedData["products"];
-    print(productdata);
+    CatalogModel.items =
+ List.from(productdata).map<Item>((item) => Item.fromMap(item)).toList();
+
+    setState(() {});
   }
 }
