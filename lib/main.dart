@@ -12,16 +12,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: MyTheme.lightThem(),
+      theme: MyTheme.lightThem(context),
       home: MainActivity(),
       debugShowCheckedModeBanner: false,
       initialRoute: '/login',
       // Set the initial route to '/login'
       routes: {
-        '/login': (context) => Login_activity(
-              password: "",
-              username: "",
-            ),
+        '/login': (context) => Login_activity(),
         // Other routes if needed...
       },
     );
@@ -52,11 +49,8 @@ class _Homeactivitys extends State<MainActivity> {
       });
 
       await Future.delayed(Duration(seconds: 1));
-      await Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => Login_activity(
-                username: names, // Passing username
-                password: password,
-              )));
+      await Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => Login_activity()));
       setState(() {
         changeButton = false;
       });

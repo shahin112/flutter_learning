@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyTheme {
-  static ThemeData lightThem() => ThemeData(
+  static ThemeData lightThem(BuildContext context) => ThemeData(
       appBarTheme: const AppBarTheme(
           color: Colors.white,
           elevation: 0.0,
@@ -12,5 +12,5 @@ class MyTheme {
             fontSize: 20,
           )));
 
-  static ThemeData dartTheme() => ThemeData(brightness: Brightness.dark);
+  static ThemeData dartTheme(BuildContext context) => ThemeData(brightness: Brightness.dark);
 }
