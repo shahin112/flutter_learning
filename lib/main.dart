@@ -12,7 +12,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: MyTheme.lightThem(context),
+      themeMode: ThemeMode.system,
+      theme: _getThemeFromBrightness(MediaQuery.of(context).platformBrightness),
       home: MainActivity(),
       debugShowCheckedModeBanner: false,
       initialRoute: '/login',
@@ -22,6 +23,14 @@ class MyApp extends StatelessWidget {
         // Other routes if needed...
       },
     );
+  }
+}
+
+ThemeData _getThemeFromBrightness(Brightness brightness) {
+  if (brightness == Brightness.dark) {
+    return MyTheme.darkTheme();
+  } else {
+    return MyTheme.LightTheme();
   }
 }
 
