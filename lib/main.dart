@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/theme/theme.dart';
+import 'package:flutter_project/core/store.dart';
 import 'activity/Login_activity.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 main() {
-  runApp(const MyApp());
+  runApp( VxState(store:Mystore(), child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -30,7 +32,7 @@ ThemeData _getThemeFromBrightness(Brightness brightness) {
   if (brightness == Brightness.dark) {
     return MyTheme.darkTheme();
   } else {
-    return MyTheme.LightTheme();
+    return MyTheme.lightTheme();
   }
 }
 
@@ -63,8 +65,6 @@ class _Homeactivitys extends State<MainActivity> {
       setState(() {
         changeButton = false;
       });
-    } else {
-      print("your value is null ");
     }
   }
 
@@ -72,8 +72,15 @@ class _Homeactivitys extends State<MainActivity> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Theme.of(context).canvasColor,
         appBar: AppBar(
-          title: Text("main"),
+          title: Text(
+            "main",
+            style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).primaryColor),
+          ),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
@@ -93,9 +100,9 @@ class _Homeactivitys extends State<MainActivity> {
                 Text(
                   "log in your account",
                   style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black38),
+                      color: Theme.of(context).primaryColor),
                 ),
                 Padding(
                   padding:
@@ -104,11 +111,23 @@ class _Homeactivitys extends State<MainActivity> {
                     children: [
                       TextFormField(
                         decoration: InputDecoration(
-                            hintText: "Enter name",
-                            labelText: "Useranme",
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)))),
+                          hintText: "Enter name",
+                          labelStyle:
+                              TextStyle(color: Theme.of(context).primaryColor),
+                          labelText: "Useranme",
+                          hintStyle:
+                              TextStyle(color: Theme.of(context).primaryColor),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor),
+                          ),
+                        ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return "Username can not be empty";
@@ -127,14 +146,26 @@ class _Homeactivitys extends State<MainActivity> {
                       TextFormField(
                         obscureText: true,
                         decoration: InputDecoration(
-                            hintText: "Enter password",
-                            labelText: "Password",
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)))),
+                          hintText: "Enter Password",
+                          labelText: "Password",
+                          labelStyle:
+                              TextStyle(color: Theme.of(context).primaryColor),
+                          hintStyle:
+                              TextStyle(color: Theme.of(context).primaryColor),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor),
+                          ),
+                        ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Password can not be empty";
+                            return "Password cannot be empty";
                           } else if (value.length < 6) {
                             return "Password length should be at least 6";
                           }
@@ -152,7 +183,7 @@ class _Homeactivitys extends State<MainActivity> {
                       Material(
                         borderRadius:
                             BorderRadius.circular(changeButton ? 50 : 8),
-                        color: Colors.green,
+                        color: Theme.of(context).colorScheme.secondary,
                         child: InkWell(
                           onTap: () => moveToHome(context),
                           child: AnimatedContainer(
@@ -167,7 +198,9 @@ class _Homeactivitys extends State<MainActivity> {
                                   )
                                 : Text(
                                     "Login",
-                                    style: TextStyle(color: Colors.black),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
                                   ),
                           ),
                         ),

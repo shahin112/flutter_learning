@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/activity/home_widgets/add_to_cart.dart';
 import 'package:flutter_project/model/catalog.dart';
 import 'package:flutter_project/theme/theme.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -19,13 +20,17 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-
         backgroundColor: (context).canvasColor,
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          title: Text("Card"),
+          toolbarTextStyle: Theme.of(context).appBarTheme.titleTextStyle,
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+          elevation: Theme.of(context).appBarTheme.elevation,
+          iconTheme: Theme.of(context).appBarTheme.iconTheme,
+          centerTitle: Theme.of(context).appBarTheme.centerTitle,
         ),
         bottomNavigationBar: Container(
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: ButtonBar(
             alignment: MainAxisAlignment.spaceBetween,
@@ -37,13 +42,11 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                   .color(Colors.deepOrange)
                   .xl4
                   .make(),
-              ElevatedButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(MyTheme.darkBluishColor),
-                      shape: MaterialStateProperty.all(StadiumBorder())),
-                  child: "Add to Cart".text.make())
+              Container(
+                height: 30,
+                width: 80,
+                child: AddToCart(catalog: widget.catalog),
+              )
             ],
           ),
         ),
@@ -56,12 +59,13 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
               )),
           Expanded(
             child: VxArc(
+
               height: 20.0,
               edge: VxEdge.top,
               arcType: VxArcType.convey,
               child: Container(
                 width: double.infinity,
-                color: Colors.white,
+                color: Theme.of(context).cardColor,
                 child: Container(
                   margin: EdgeInsets.only(top: 50),
                   child: Column(
@@ -71,12 +75,12 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                         style: (TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 28,
-                            color: Colors.black.withOpacity(1.0))),
+                            color: Theme.of(context).primaryColor)),
                       ),
                       Text(
                         widget.catalog.desc,
                         style:
-                            (TextStyle(color: Colors.black.withOpacity(0.5))),
+                            (TextStyle(color: Theme.of(context).primaryColor.withOpacity(0.5))),
                       ),
                     ],
                   ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/activity/home_widgets/add_to_cart.dart';
 import 'package:flutter_project/model/catalog.dart';
-import 'package:flutter_project/theme/theme.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import 'cataloge_image.dart';
@@ -15,6 +15,7 @@ class CatalogeItem extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height / 8,
       child: Card(
+        color: Theme.of(context).cardColor,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(8))),
         child: Container(
@@ -33,7 +34,7 @@ class CatalogeItem extends StatelessWidget {
               Expanded(
                 child: Padding(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                      const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -42,8 +43,8 @@ class CatalogeItem extends StatelessWidget {
                       cataloge.desc.text.textStyle(context.captionStyle).make(),
                       SizedBox(height: 8), // Adjust spacing
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 2, vertical: 0),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 2, vertical: 0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -51,16 +52,7 @@ class CatalogeItem extends StatelessWidget {
                             Container(
                               height: 30,
                               width: 80,
-                              child: ElevatedButton(
-
-                                onPressed: () {},
-                                child: "Add to Cart".text.make(),
-                                style: ElevatedButton.styleFrom(
-                                  padding: EdgeInsets.zero,
-                                  backgroundColor:
-                                  MyTheme.darkBluishColor, // Your color
-                                ),
-                              ),
+                              child: AddToCart(catalog: cataloge),
                             ),
                           ],
                         ),
@@ -76,3 +68,5 @@ class CatalogeItem extends StatelessWidget {
     );
   }
 }
+
+

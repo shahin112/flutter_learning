@@ -1,12 +1,19 @@
 class CatalogModel {
+
+
   static List<Item> items = [];
+
+   Item getById(int id) =>
+      items.firstWhere((element) => element.id == id, orElse: null);
+
+   Item getByposition(int pos) => items[pos];
 }
 
 class Item {
-  final String id;
+  final int id;
   final String name;
   final String desc;
-  final String price;
+  final num price;
   final String color;
   final String image;
 
@@ -21,21 +28,21 @@ class Item {
 
   factory Item.fromMap(Map<String, dynamic> map) {
     return Item(
-      id: map["id"].toString(),
+      id: map["id"],
       name: map["name"],
-      desc: map["desc"] ,
-      price: map["price"].toString(),
-      color: map["color"] ,
-      image: map["image"] ,
+      desc: map["desc"],
+      price: map["price"],
+      color: map["color"],
+      image: map["image"],
     );
   }
 
   Map<String, dynamic> toMap() => {
-    "id": id,
-    "name": name,
-    "desc": desc,
-    "price": price,
-    "color": color,
-    "image": image,
-  };
+        "id": id,
+        "name": name,
+        "desc": desc,
+        "price": price,
+        "color": color,
+        "image": image,
+      };
 }
